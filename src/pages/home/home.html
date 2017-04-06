@@ -1,0 +1,47 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+
+    <ion-title>
+      Todo Lists
+    </ion-title>
+
+    <ion-buttons end > 
+      <button ion-button icon-only (click)="addTodolist()">
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+
+</ion-header>   
+
+<ion-content>
+
+  <ion-list no-lines>
+  
+    <ion-item-sliding *ngFor="let todolist of todolists">
+      <button ion-item (click)="viewTodolist(todolist)">
+        {{todolist.name}}
+        <!-- <span>{{todolist.items.length | pluralItem }} </span> -->
+      </button>
+
+      <ion-item-options>
+
+        <button ion-button icon-only color="light" (click)="renameTodolist(todolist)">
+          <ion-icon name="clipboard"></ion-icon>
+          Edit
+        </button>
+
+        <button ion-button icon-only color="danger" (click)="deleteTodolist(todolist)">
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+
+      </ion-item-options>
+
+    </ion-item-sliding>
+
+  </ion-list>
+
+</ion-content>      

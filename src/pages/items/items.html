@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-navbar color="secondary">
+
+        <ion-title>
+            {{todolist.name}} List
+        </ion-title>
+
+        <ion-buttons end>
+
+            <button ion-button icon-only (click)="uncheckItems()">
+                <ion-icon name="refresh-circle"></ion-icon>
+            </button>
+
+            <button ion-button icon-only (click)="addItem()">
+                <ion-icon name="add-circle"></ion-icon>
+            </button>
+
+        </ion-buttons>
+
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list no-lines>
+
+        <ion-item-sliding *ngFor="let item of todolist.items">
+
+            <ion-item>
+                <ion-label>{{item.name}}</ion-label>
+                <ion-checkbox (click)="toggleItem(item)"> </ion-checkbox>
+            </ion-item>
+
+            <ion-item-options>
+
+                <button ion-button icon-only color="light" (click)="renameItem(item)">
+                    <ion-icon name="clipboard"></ion-icon> 
+                    Edit
+                </button>
+
+                <button ion-button icon-only color="danger" (click)="deleteItem(item)">
+                    <ion-icon name="trash"></ion-icon> 
+                    Delete
+                </button>
+
+            </ion-item-options>
+
+        </ion-item-sliding>
+
+    </ion-list>
+</ion-content>
