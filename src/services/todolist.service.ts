@@ -67,20 +67,35 @@ export class TodolistService {
 
       let index = parsedTodolists.findIndex(post => post.name === todolist.name); 
       parsedTodolists[index].items.push(item); 
+      this.save(parsedTodolists);
+      debugger;  
+      
+    })
+  }
+
+  renameItem(todolist, itemIndex, newName) {
+    this.getData().then(todolists => {
+     let parsedTodolists = JSON.parse(todolists);
+
+      let parsedTodolist = parsedTodolists.find(post => post.name === todolist.name); 
+      let item = parsedTodolist.items[itemIndex];
+      item.name = newName; 
+
       this.save(parsedTodolists); 
       
     })
   }
 
-  renameItem(todolist, item, newItemName) {
+  deleteItem(todolist, item) {
     this.getData().then(todolists => {
-     let parsedTodolists = JSON.parse(todolists);
+      let parsedTodolists = JSON.parse(todolists);
 
+      // todolist
       let index = parsedTodolists.findIndex(post => post.name === todolist.name); 
-
-      parsedTodolists[index].items.push(item); 
+      let itemIndex = parsedTodolists[index].items.indexOf(item); 
+      parsedTodolists[index].items.splice(itemIndex, 1); 
       this.save(parsedTodolists); 
-      
+       
     })
   }
   

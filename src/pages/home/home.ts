@@ -103,7 +103,7 @@ export class HomePage {
             this.todolists[index].name = data.name; 
           }
 
-          //  this.todolistService.renameTodolist(todolist, data.name); 
+           this.todolistService.renameTodolist(todolist, data.name); 
 
 		    }
 		 }

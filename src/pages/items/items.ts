@@ -44,11 +44,10 @@ export class ItemsPage {
 		  {
 		   text: 'Save', 
 		   handler: data => {
-		   	console.log(data, 'item data');
 		    let item = Object.assign(new ItemModel(), data);
-		    console.log(item, 'item object.assign');
 		    
 		    this.todolist.items.push(item); 
+
 		    this.todolistService.saveItem(this.todolist, item); 
 		    console.log(this.todolist);
 		    // let itemTodo = this.todolistService.getTodolist(this.todolist, item);
@@ -77,7 +76,15 @@ export class ItemsPage {
 		  {
 		   text: 'Save',
 		   handler: data => {
-		   // let index = this.todolist.items.indexOf(item);
+			   console.log(data);
+			   console.log(item); 
+		   let index = this.todolist.items.indexOf(item);
+
+		   if ( index > -1 ) {
+			this.todolistService.renameItem(this.todolist, index, data.name); 
+			this.todolist.items[index].name = data.name; 
+			// debugger; 
+		   }
 		  }
 		 }
 		]
@@ -86,7 +93,11 @@ export class ItemsPage {
 	}
 
 	deleteItem(item): void {
-	 // let index = this.todolist.items.indexOf(item);
+	 let index = this.todolist.items.indexOf(item);
+	 if (index > -1 ) {
+		 this.todolistService.deleteItem(this.todolist, item); 
+		 this.todolist.items.splice(index, 1); 
+	 }
 
 	 
 	}
