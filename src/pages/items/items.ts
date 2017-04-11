@@ -5,7 +5,6 @@ import { TodolistModel } from '../../models/todolist.model';
 import { ItemModel } from '../../models/item.model';
 
 import { TodolistService } from '../../services/todolist.service';
-import { ItemService } from '../../services/item.service'; 
 
 
 @Component({
@@ -15,16 +14,15 @@ import { ItemService } from '../../services/item.service';
 export class ItemsPage {
 
 	todolist: TodolistModel; 
-	itemslist: ItemModel[] = []; 
 
   constructor(
   	public navCtrl: NavController,
    	private navParams: NavParams,
    	private alertCtrl: AlertController,
    	private todolistService: TodolistService, 
-   	private itemService: ItemService, 
   ) {
   	this.todolist = navParams.get('todolist');
+  	// this.todolistService.todolist = this.todolist; 
   	console.log(this.todolist);
   }
 
@@ -51,7 +49,7 @@ export class ItemsPage {
 		    console.log(item, 'item object.assign');
 		    
 		    this.todolist.items.push(item); 
-		    this.itemService.saveItem(this.todolist, item); 
+		    this.todolistService.saveItem(this.todolist, item); 
 		    console.log(this.todolist);
 		    // let itemTodo = this.todolistService.getTodolist(this.todolist, item);
 		   	

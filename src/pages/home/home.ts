@@ -97,9 +97,13 @@ export class HomePage {
 		   {
 		    text: 'Save',
 		    handler: data => {
+          let index = this.todolists.indexOf(todolist);
 
-           this.todolistService.renameTodolist(todolist, data.name); 
-		       
+          if(index -1) {
+            this.todolists[index].name = data.name; 
+          }
+
+          //  this.todolistService.renameTodolist(todolist, data.name); 
 
 		    }
 		 }
@@ -115,8 +119,9 @@ export class HomePage {
 
 		 if(index > -1) {
 		  this.todolists.splice(index, 1); 
-      this.todolistService.save(todolist); 
+      this.todolistService.deleteTodolist(todolist); 
 		 }
+
   }
 
   viewTodolist(todolist): void {

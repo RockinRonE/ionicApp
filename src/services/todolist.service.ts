@@ -56,8 +56,32 @@ export class TodolistService {
        let index = parsedTodolists.findIndex(post => post.name === todolist.name); 
        parsedTodolists.splice(index, 1); 
        this.save(parsedTodolists); 
+       debugger; 
 
    });
+  }
+
+  saveItem(todolist, item) {
+    this.getData().then(todolists => {
+     let parsedTodolists = JSON.parse(todolists);
+
+      let index = parsedTodolists.findIndex(post => post.name === todolist.name); 
+      parsedTodolists[index].items.push(item); 
+      this.save(parsedTodolists); 
+      
+    })
+  }
+
+  renameItem(todolist, item, newItemName) {
+    this.getData().then(todolists => {
+     let parsedTodolists = JSON.parse(todolists);
+
+      let index = parsedTodolists.findIndex(post => post.name === todolist.name); 
+
+      parsedTodolists[index].items.push(item); 
+      this.save(parsedTodolists); 
+      
+    })
   }
   
 
@@ -70,6 +94,7 @@ export class TodolistService {
   //     }
   //   });
   // }
+  
   // findTodolist(todolistName, todolistArray) {
   //   const queriedItem = todolistArray.find(todolist => todolist.name === todolistName);
   //   return queriedItem;

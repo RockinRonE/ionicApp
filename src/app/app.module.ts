@@ -11,15 +11,14 @@ import { PluralItem } from '../pipes/plural-item';
 
 import { TodolistService } from '../services/todolist.service'; 
 import { IonicStorageModule } from '@ionic/storage';
-import { ItemService } from '../services/item.service'; 
 
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ItemsPage,
     PluralItem,
+    ItemsPage,
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -36,7 +35,6 @@ import { ItemService } from '../services/item.service';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     TodolistService,
-    ItemService, 
   ]
 })
 export class AppModule {}
