@@ -23,7 +23,7 @@
     <ion-item-sliding *ngFor="let todolist of todolists">
       <button ion-item (click)="viewTodolist(todolist)">
         {{todolist.name}}
-        <!-- <span>{{todolist.items.length | pluralItem }} </span> -->
+         <span>{{todolist.items.length | pluralItem }} </span> 
       </button>
 
       <ion-item-options>
