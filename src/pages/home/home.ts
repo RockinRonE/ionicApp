@@ -24,32 +24,12 @@ export class HomePage {
   ) { }
 
   ionViewDidLoad() {
-    // let todolists = this.todolistService.fetchParsedData();
-    // console.log(todolists, 'loaded todolists');
-    // this.todolists = savedTodolists; 
-   
     this.todolistService.getData().then(todolists => {
-      // {"items":[{"checked":false,"name":"Item!"}],"name":"One Todolist"}
-      console.log(todolists, 'getData results');
-
-      // Object {items: Array(1), name: "One Todolist"}
       if(todolists) {
         let savedTodolists = JSON.parse(todolists);
-        console.log(savedTodolists, 'parsed getData todolists');
-
-
-        // [Object]
         this.todolists = savedTodolists; 
-        console.log(this.todolists, "added savedTodolists"); 
-
-
       }
-
-
     });
-
-
-    
   }
    
   addTodolist(): void {

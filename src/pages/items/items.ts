@@ -22,8 +22,6 @@ export class ItemsPage {
    	private todolistService: TodolistService, 
   ) {
   	this.todolist = navParams.get('todolist');
-  	// this.todolistService.todolist = this.todolist; 
-  	console.log(this.todolist);
   }
 
   
@@ -45,13 +43,8 @@ export class ItemsPage {
 		   text: 'Save', 
 		   handler: data => {
 		    let item = Object.assign(new ItemModel(), data);
-		    
 		    this.todolist.items.push(item); 
-
-		    this.todolistService.saveItem(this.todolist, item); 
-		    console.log(this.todolist);
-		    // let itemTodo = this.todolistService.getTodolist(this.todolist, item);
-		   	
+		    this.todolistService.saveItem(this.todolist, item);
 		   }
 		  }
 		]
@@ -62,31 +55,29 @@ export class ItemsPage {
 
 	renameItem(item): void {
 		let prompt = this.alertCtrl.create({
-		  title: 'Rename This Item',
-		  message: 'Enter the new name of this item:',
-		  inputs: [
-		   {
-		    name: 'name'
-		   }
-		  ],
-		  buttons: [
-		   {
-		    text: 'Cancel'
-		   },
-		  {
-		   text: 'Save',
-		   handler: data => {
-			   console.log(data);
-			   console.log(item); 
-		   let index = this.todolist.items.indexOf(item);
+			title: 'Rename This Item',
+			message: 'Enter the new name of this item:',
+			inputs: [
+			{
+				name: 'name'
+			}
+			],
+			buttons: [
+			{
+				text: 'Cancel'
+			},
+			{
+			text: 'Save',
+			handler: data => {
+				
+				let index = this.todolist.items.indexOf(item);
 
-		   if ( index > -1 ) {
-			this.todolistService.renameItem(this.todolist, index, data.name); 
-			this.todolist.items[index].name = data.name; 
-			// debugger; 
-		   }
-		  }
-		 }
+				if ( index > -1 ) {
+					this.todolistService.renameItem(this.todolist, index, data.name); 
+					this.todolist.items[index].name = data.name; 
+				}
+			}
+			}
 		]
 		});
  		prompt.present();
@@ -94,26 +85,24 @@ export class ItemsPage {
 
 	deleteItem(item): void {
 	 let index = this.todolist.items.indexOf(item);
-	 if (index > -1 ) {
-		 this.todolistService.deleteItem(this.todolist, item); 
-		 this.todolist.items.splice(index, 1); 
-	 }
-
-	 
+		if (index > -1 ) {
+			this.todolistService.deleteItem(this.todolist, item); 
+			this.todolist.items.splice(index, 1); 
+		}
 	}
 
 	toggleItem(item): void {
 	 let index = this.todolist.items.indexOf(item); 
-	 this.todolist.items[index].checked = !item.checked; 
-	 console.log(this.todolist, 'toggle item'); 
-	 // this.todolistService.save(this.todolists); 
+	 this.todolist.items[index].checked = !item.checked;
+	 this.todolistService.toggledbItem(this.todolist, index, item);
 	}
 
 	uncheckItems(): void {
+	this.todolistService.uncheckDBItems(this.todolist); 
+
 	 this.todolist.items.forEach(item => {
 		  if(item.checked) {
-		   item.checked = false; 
-		   // this.todolistService.save(this.todolist); 
+		   item.checked = false;  
 		  }
 		})
 	}
